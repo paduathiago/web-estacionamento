@@ -1,5 +1,13 @@
 <?php 
-	$clientes = [
+
+	$conexao = new PDO("mysql:host=localhost;dbname=estacionamento", "estacionamento", "joselia");
+
+	$sql = "SELECT * FROM Cliente";
+	$resultado = $conexao->query($sql);
+
+	$clientes = $resultado->fetchAll();
+
+	/*[
 		[
 			'cpf'=>'04080660608',
 			'nome'=>'Livão',
@@ -10,7 +18,7 @@
 			'nome'=>'Livinha',
 			'dtNasc'=>'14/01/02'
 		]
-	];
+	];*/
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -41,7 +49,7 @@
 						<?php foreach ($clientes as $cliente): ?>
 						<tr>
 							<td><?= $cliente['cpf'] ?></td>
-							<td><?= $cliente['nome'] ?></td>
+							<td><?= $cliente['Nome'] ?></td>
 							<td><?= $cliente['dtNasc'] ?></td>
 						</tr>
 						<?php endforeach; ?>
