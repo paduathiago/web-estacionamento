@@ -1,3 +1,31 @@
+<?php 
+	var_dump($_POST);
+	if (count($_POST)>0) {
+		ECHO '<br>' .$_POST ['cpf'];
+		ECHO '<br>' .$_POST ['nome'];
+		ECHO '<br>' .$_POST ['data_nasc'];
+		
+		
+		$conexao = new PDO("mysql:host=localhost;dbname=estacionamento", "estacionamento", "joselia");
+
+		$sql = "insert into Cliente VALUES (?, ?, ?)";
+		$comando = $conexao->prepare($sql);
+
+		$comando->execute
+		(
+			[
+				$_POST ['cpf'],
+				$_POST ['nome'],
+				$_POST ['data_nasc']
+			]
+		);
+
+		//REDIRECIONA PARA A PÁGINA CLIENTES.PHP
+		header('location: clientes.php');
+	}
+?>
+
+
 <!DOCTYPE html>
  <html lang="en">
  <head>
@@ -14,7 +42,7 @@
 	<div id="container">
 		<main>
 			<h2>Novo cliente</h2>
-			<form>
+			<form action="cad_cliente.php" method="post">
 				<p>
 					<label for="cpf">CPF:</label>
 					<input type="number" name="cpf" id="cpf">
