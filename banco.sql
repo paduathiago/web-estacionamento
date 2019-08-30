@@ -64,6 +64,7 @@ insert into Cliente values (404040, 'Nathalia Terere', '2000/07/19');
 insert into modelo values ( 1, 'Sedan');
 insert into modelo values ( 2, 'Van');
 insert into modelo values ( 3, 'Utilitario');
+select * from Modelo;
 
 insert into veiculo values ('gta 1234', 1, 333009, 'branco');
 insert into veiculo values ('isa 4321', 2, 228877, 'rosa');

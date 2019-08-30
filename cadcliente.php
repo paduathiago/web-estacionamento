@@ -11,7 +11,7 @@
 		$sql = "insert into Cliente VALUES (?, ?, ?)";
 		$comando = $conexao->prepare($sql);
 
-		$comando->execute
+		$sucesso = $comando->execute
 		(
 			[
 				$_POST ['cpf'],
@@ -19,6 +19,20 @@
 				$_POST ['data_nasc']
 			]
 		);
+
+		// se o comando for bem sucedido, monto uma mensagem amigável
+		$mensagem = '';
+		if ($sucesso)
+		{
+			$mensagem = "Cliente cadastrado!";
+		}
+		else
+		{
+			// se deu erro, a mensagem não será tão amigável :(
+			$mensagem = "Erro: " . $comando->errorInfo()[2];
+		}
+		// uso um cookie para passar a mensagem para a página de clientes
+		setcookie('mensagem', $mensagem);
 
 		//REDIRECIONA PARA A PÁGINA CLIENTES.PHP
 		header('location: clientes.php');
@@ -38,6 +52,15 @@
  	
 	<header>
 		<h1>ℙ IF Park</h1>
+		<nav>
+			<ul id="menu">
+				<li><a href="estacionados.php">Estacionados</a></li>
+				<li><a href="patios.php">Pátios</a></li>
+				<li class="ativo"><a href="clientes.php">Clientes</a></li>
+				<li><a href="veiculos.php">Veículos</a></li>
+				<li><a href="modelos.php">Modelos</a></li>
+			</ul>
+		</nav>
 	</header>
 	<div id="container">
 		<main>
